@@ -1,18 +1,21 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
-# Compiled output
+# Compiled output / build artifacts
 /dist
-/tmp
+/.angular
 /out-tsc
 /bazel-out
 
 # Node
 /node_modules
-npm-debug.log
+npm-debug.log*
 yarn-error.log
+yarn-debug.log*
+pnpm-debug.log*
 
 # IDEs and editors
 .idea/
+*.iml
 .project
 .classpath
 .c9/
@@ -28,7 +31,7 @@ yarn-error.log
 !.vscode/extensions.json
 !.vscode/mcp.json
 .history/*
-
+.vscode
 # Miscellaneous
 /.angular/cache
 .sass-cache/
@@ -42,3 +45,39 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Environment files and sensitive credentials
+.env
+.env.*
+!.env.example
+.env.local
+.env.development.local
+.env.production.local
+
+# Test / coverage tools
+.nyc_output/
+
+# Build/tool caches
+.cache/
+
+# Runtime debug / pid files
+.pids/
+*.pid
+
+# Logs
+*.log
+
+# Workspace and temporary OS files
+*.swp
+*.swo
+*.tmp
+*.sln
+*.slnx
+*.sw?
+*.suo
+*.njsproj
+*.ntvs
+# Other
+__screenshots__/
