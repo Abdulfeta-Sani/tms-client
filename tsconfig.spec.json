@@ -5,12 +5,8 @@
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
     "module": "ESNext",
-    "types": [
-      "vitest/globals"
-    ]
+    "forceConsistentCasingInFileNames": true,
+    "types": ["vitest/globals"]
   },
-  "include": [
-    "src/**/*.d.ts",
-    "src/**/*.spec.ts"
-  ]
+  "include": ["src/**/*.d.ts", "src/**/*.spec.ts"]
 }
