@@ -31,7 +31,8 @@ pnpm-debug.log*
 !.vscode/extensions.json
 !.vscode/mcp.json
 .history/*
-.vscode
+.vscode/
+
 # Miscellaneous
 /.angular/cache
 .sass-cache/
