@@ -7,7 +7,10 @@
 
   <button (click)="registerForClass()">Register for a Class (+3 credits)</button>
 
+  <p><a routerLink="/enroll">Go to Enrollment Form</a></p>
+
   <h2>Course Catalog</h2>
+
   @if (availableCourses().length === 0) {
     <div class="empty-state">
       <p>No courses are available this term. Check back during registration.</p>

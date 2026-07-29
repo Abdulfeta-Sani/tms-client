@@ -17,5 +17,13 @@ export const routes: Routes = [
       ),
   },
 
+  {
+    path: 'enroll',
+    loadComponent: () =>
+      import('./features/enrollment-form/enrollment-form.component').then(
+        (m) => m.EnrollmentFormComponent,
+      ),
+  },
+
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
