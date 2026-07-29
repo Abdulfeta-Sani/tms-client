@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -11,6 +11,7 @@ import {
   selector: 'app-enrollment-form',
   standalone: true,
   imports: [ReactiveFormsModule], // To recognize form directives by Angular
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './enrollment-form.component.html',
 })
 export class EnrollmentFormComponent {
