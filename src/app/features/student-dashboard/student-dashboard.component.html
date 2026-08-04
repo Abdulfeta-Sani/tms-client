@@ -8,6 +8,12 @@
 
   <p><a routerLink="/enroll">Go to Enrollment Form</a></p>
 
+  <h2>Enrollment Summary</h2>
+  <div class="summary-card">
+    <p>Pending Enrollments: {{ store.pendingCount() }}</p>
+    <p>Total Enrollments: {{ store.entities().length }}</p>
+  </div>
+
   <h2>Course Catalog</h2>
 
   @if (coursesResource.isLoading()) {
