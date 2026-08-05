@@ -1,25 +1,27 @@
-<header>
-  <a routerLink="/dashboard">TMS</a>
+<header class="app-header">
+  <div class="app-header__content">
+    <a class="app-brand" routerLink="/dashboard">TMS</a>
 
-  <nav aria-label="Main navigation">
-    <a
-      routerLink="/dashboard"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-    >
-      Dashboard
-    </a>
+    <nav class="app-navigation" aria-label="Main navigation">
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Dashboard
+      </a>
 
-    <a routerLink="/courses" routerLinkActive="active"> Courses </a>
+      <a routerLink="/courses" routerLinkActive="active"> Courses </a>
 
-    <a routerLink="/enrollment-summary" routerLinkActive="active"> Enrollment-Summary </a>
+      <a routerLink="/enrollment-summary" routerLinkActive="active"> Enrollment-Summary </a>
 
-    <a routerLink="/enrollments" routerLinkActive="active"> Enrollments </a>
+      <a routerLink="/enrollments" routerLinkActive="active"> Enrollments </a>
 
-    <a routerLink="/enroll" routerLinkActive="active"> Enroll </a>
-  </nav>
+      <a routerLink="/enroll" routerLinkActive="active"> Enroll </a>
+    </nav>
+  </div>
 </header>
 
-<main>
+<main class="app-content">
   <router-outlet />
 </main>
