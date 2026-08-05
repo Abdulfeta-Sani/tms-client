@@ -1,0 +1,18 @@
+<section class="summary-card" aria-labelledby="enrollment-summary-heading">
+  <h2 id="enrollment-summary-heading">Enrollment Summary</h2>
+
+  @if (store.isLoading()) {
+    <p>Loading enrollment summary...</p>
+  } @else {
+    <p>
+      Pending Enrollments: <strong>{{ store.pendingCount() }}</strong>
+    </p>
+    <p>
+      Total Enrollments: <strong>{{ store.entities().length }}</strong>
+    </p>
+  }
+
+  @if (store.error()) {
+    <p class="error">{{ store.error() }}</p>
+  }
+</section>

@@ -8,11 +8,19 @@
 
   <p><a routerLink="/enroll">Go to Enrollment Form</a></p>
 
-  <h2>Enrollment Summary</h2>
-  <div class="summary-card">
-    <p>Pending Enrollments: {{ store.pendingCount() }}</p>
-    <p>Total Enrollments: {{ store.entities().length }}</p>
-  </div>
+  <section class="enrollment-command-center" aria-label="Enrollment command center">
+    <div class="enrollment-widgets">
+      <section class="enrollment-list-panel" aria-labelledby="enrollment-list-heading">
+        <h2 id="enrollment-list-heading">Enrollment List</h2>
+
+        <tms-enrollment-list />
+      </section>
+
+      <aside class="dashboard-summary-panel">
+        <tms-dashboard-summary />
+      </aside>
+    </div>
+  </section>
 
   <h2>Course Catalog</h2>
 
@@ -29,6 +37,7 @@
       }
     </div>
   }
+
   @if (selectedCourse(); as picked) {
     <p class="selection-hint" role="status">
       Last enrollment request: <strong>{{ picked.title }}</strong> ({{ picked.code }})

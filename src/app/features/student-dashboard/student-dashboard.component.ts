@@ -1,19 +1,22 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+// import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CourseCardComponent } from '../../ui/course-card/course-card.component';
 import { Course } from '../../models/course.model';
 import { CourseService } from '../../services/course.service';
 import { EnrollmentStore } from '../../store/enrollment.store';
+import { EnrollmentListComponent } from '../enrollment-list/enrollment-list.component';
+import { DashboardSummaryComponent } from '../dashboard-summary/dashboard-summary.component';
 
 @Component({
   selector: 'app-student-dashboard',
   standalone: true,
-  imports: [CourseCardComponent, RouterLink],
+  imports: [CourseCardComponent, RouterLink, EnrollmentListComponent, DashboardSummaryComponent],
   templateUrl: './student-dashboard.component.html',
   styleUrl: './student-dashboard.component.scss',
 })
-export class StudentDashboardComponent implements OnInit {
+export class StudentDashboardComponent {
   private api = inject(CourseService);
   store = inject(EnrollmentStore);
 
@@ -29,10 +32,6 @@ export class StudentDashboardComponent implements OnInit {
   });
 
   selectedCourse = signal<Course | null>(null);
-
-  ngOnInit() {
-    this.store.loadEnrollments();
-  }
 
   registerForClass() {
     this.earnedCredits.update((credits) => credits + 3);

@@ -1,0 +1,39 @@
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.enrollment-command-center {
+  margin: 32px 0;
+}
+
+.enrollment-widgets {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.enrollment-list-panel,
+.dashboard-summary-panel {
+  min-width: 0;
+}
+
+.enrollment-list-panel {
+  padding: 20px;
+  border: 1px solid #d9e1ec;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgb(15 23 42 / 8%);
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 16px;
+  }
+
+  .enrollment-widgets {
+    grid-template-columns: 1fr;
+  }
+}
