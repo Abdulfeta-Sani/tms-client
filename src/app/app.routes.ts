@@ -10,6 +10,14 @@ export const routes: Routes = [
   },
 
   {
+    path: 'courses',
+    loadComponent: () =>
+      import('./features/course-catalog/course-catalog.component').then(
+        (m) => m.CourseCatalogComponent,
+      ),
+  },
+
+  {
     path: 'courses/:id',
     loadComponent: () =>
       import('./features/course-detail/course-detail.component').then(
