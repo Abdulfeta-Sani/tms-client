@@ -43,6 +43,11 @@ testem.log
 /typings
 __screenshots__/
 
+# Temporary files
+*.tmp
+*.temp
+lab_sessions_docs
+
 # System files
 .DS_Store
 Thumbs.db
