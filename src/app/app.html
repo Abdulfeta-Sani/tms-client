@@ -1,1 +1,23 @@
-<router-outlet />
+<header>
+  <a routerLink="/dashboard">TMS</a>
+
+  <nav aria-label="Main navigation">
+    <a
+      routerLink="/dashboard"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Dashboard
+    </a>
+
+    <a routerLink="/enrollment-summary" routerLinkActive="active"> Enrollment Summary </a>
+
+    <a routerLink="/enrollments" routerLinkActive="active"> Enrollments </a>
+
+    <a routerLink="/enroll" routerLinkActive="active"> Enroll </a>
+  </nav>
+</header>
+
+<main>
+  <router-outlet />
+</main>
