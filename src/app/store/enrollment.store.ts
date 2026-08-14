@@ -56,8 +56,21 @@ export const EnrollmentStore = signalStore(
     approveEnrollment: rxMethod<string>(
       pipe(
         tap((id) => {
-          patchState(store, updateEntity({ id, changes: { status: 'Approved' } }));
+          patchState(store, { error: null });
         }),
+        concatMap((id) =>
+          api.approve(id).pipe(
+            tap(() => {
+              patchState(store, updateEntity({ id, changes: { status: 'Approved' } }));
+            }),
+            catchError((err) => {
+              patchState(store, {
+                error: err.message || 'Server rejected the approval.',
+              });
+              return EMPTY;
+            }),
+          ),
+        ),
       ),
     ),
 
