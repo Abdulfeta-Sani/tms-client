@@ -1,8 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
-import { rxResource } from '@angular/core/rxjs-interop';
 import { CourseCardComponent } from '../../ui/course-card/course-card.component';
 import { Course } from '../../models/course.model';
-import { CourseService } from '../../services/course.service';
+import { CourseStore } from '../../store/course.store';
 
 @Component({
   selector: 'tms-course-catalog',
@@ -12,17 +11,20 @@ import { CourseService } from '../../services/course.service';
   styleUrl: './course-catalog.component.scss',
 })
 export class CourseCatalogComponent {
-  private api = inject(CourseService);
-
-  coursesResource = rxResource({
-    stream: () => this.api.getAll(),
-  });
+  public readonly store = inject(CourseStore);
 
   selectedCourse = signal<Course | null>(null);
 
+  constructor() {
+    this.store.loadCourses();
+  }
+
   handleEnroll(course: Course) {
     this.selectedCourse.set(course);
-
     console.log('Enrollment requested for:', course.title);
+  }
+
+  handleDelete(courseId: number) {
+    this.store.deleteCourse(courseId);
   }
 }

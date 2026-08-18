@@ -1,13 +1,17 @@
 <h1>Course Catalog</h1>
 
-@if (coursesResource.isLoading()) {
+@if (store.isLoading()) {
   <div>Fetching courses from the server...</div>
-} @else if (coursesResource.error()) {
-  <div>Could not load courses. Make sure your .NET API is running.</div>
+} @else if (store.error()) {
+  <div>{{ store.error() }}</div>
 } @else {
   <div>
-    @for (course of coursesResource.value()!; track course.id) {
-      <tms-course-card [course]="course" (enrollClicked)="handleEnroll($event)" />
+    @for (course of store.entities(); track course.id) {
+      <tms-course-card
+        [course]="course"
+        (enrollClicked)="handleEnroll($event)"
+        (deleteClicked)="handleDelete($event)"
+      />
     } @empty {
       <p>No courses are available this term.</p>
     }

@@ -5,14 +5,21 @@
     </a>
     ({{ course().code }})
   </h3>
+
   <p>Enrolled {{ course().enrollmentCount }} of {{ course().maxCapacity }} seats</p>
+
   <span class="badge" [class.closed]="course().enrollmentCount >= course().maxCapacity">
     {{ course().enrollmentCount >= course().maxCapacity ? 'Full' : 'Accepting enrollments' }}
   </span>
-  <button
-    (click)="enrollClicked.emit(course())"
-    [disabled]="course().enrollmentCount >= course().maxCapacity"
-  >
-    Enroll
-  </button>
+
+  <div class="actions">
+    <button
+      (click)="enrollClicked.emit(course())"
+      [disabled]="course().enrollmentCount >= course().maxCapacity"
+    >
+      Enroll
+    </button>
+
+    <button class="danger" type="button" (click)="deleteClicked.emit(course().id)">Delete</button>
+  </div>
 </div>
