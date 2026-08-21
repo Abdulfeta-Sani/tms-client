@@ -12,6 +12,14 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+}
+
 @Service()
 export class AuthService {
   private http = inject(HttpClient);
@@ -30,5 +38,9 @@ export class AuthService {
     const user = await firstValueFrom(this.http.get<TmsUser>('/api/auth/me'));
 
     this.currentUser.set(user);
+  }
+
+  async register(request: RegisterRequest): Promise<void> {
+    await firstValueFrom(this.http.post<void>('/api/auth/register', request));
   }
 }
