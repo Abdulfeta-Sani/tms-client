@@ -1,4 +1,4 @@
-import { Service, inject, signal } from '@angular/core';
+import { Injectable, Service, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 
@@ -8,26 +8,27 @@ export interface TmsUser {
 }
 
 export interface LoginRequest {
-  username: string;
+  email: string;
   password: string;
 }
 
 @Service()
 export class AuthService {
   private http = inject(HttpClient);
+
   currentUser = signal<TmsUser | null>(null);
 
   hasRole(role: string): boolean {
     const user = this.currentUser();
+
     return user?.role === role || user?.role === 'Admin';
   }
 
-  async login(credentials: LoginRequest) {
-    // Server sets the HttpOnly cookie in the Set-Cookie responseheader
-    await firstValueFrom(this.http.post<void>('/api/v1/auth/login', credentials));
+  async login(credentials: LoginRequest): Promise<void> {
+    await firstValueFrom(this.http.post<void>('/api/auth/login', credentials));
 
-    // Fetch authenticated profile — browser automatically sendsthe cookie
-    const user = await firstValueFrom(this.http.get<TmsUser>('/api/v1/auth/me'));
+    const user = await firstValueFrom(this.http.get<TmsUser>('/api/auth/me'));
+
     this.currentUser.set(user);
   }
 }
