@@ -58,16 +58,12 @@ export class RegisterComponent {
         role: formValue.role!,
       });
 
-      this.registrationSuccessful = true;
+      await this.router.navigateByUrl('/login');
     } catch (error: any) {
       this.errorMessage =
         error?.error?.errors?.join(' ') ?? 'Registration failed. Please try again.';
     } finally {
       this.isSubmitting = false;
     }
-  }
-
-  goToLogin(): void {
-    this.router.navigateByUrl('/login');
   }
 }

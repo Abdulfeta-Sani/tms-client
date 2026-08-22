@@ -34,10 +34,6 @@ export class AuthService {
 
   async login(credentials: LoginRequest): Promise<void> {
     await firstValueFrom(this.http.post<void>('/api/auth/login', credentials));
-
-    const user = await firstValueFrom(this.http.get<TmsUser>('/api/auth/me'));
-
-    this.currentUser.set(user);
   }
 
   async register(request: RegisterRequest): Promise<void> {
