@@ -8,6 +8,14 @@ export interface TmsUser {
   role: string;
 }
 
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+}
+
 export interface LoginRequest {
   email: string;
   password: string;
@@ -52,6 +60,10 @@ export class AuthService {
         payload.role ||
         'Student',
     });
+  }
+
+  async register(request: RegisterRequest): Promise<void> {
+    await firstValueFrom(this.http.post<void>('/api/auth/register', request));
   }
 
   logout(): void {
