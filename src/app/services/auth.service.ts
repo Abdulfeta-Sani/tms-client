@@ -1,8 +1,9 @@
-import { Injectable, Service, inject, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 
 export interface TmsUser {
+  email: string;
   displayName: string;
   role: string;
 }
@@ -12,19 +13,22 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface RegisterRequest {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  role: string;
+export interface AuthResponse {
+  accessToken: string;
+  refreshToken: string;
 }
 
-@Service()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private http = inject(HttpClient);
 
+  private accessToken = signal<string | null>(null);
+
   currentUser = signal<TmsUser | null>(null);
+
+  getAccessToken(): string | null {
+    return this.accessToken();
+  }
 
   hasRole(role: string): boolean {
     const user = this.currentUser();
@@ -33,10 +37,25 @@ export class AuthService {
   }
 
   async login(credentials: LoginRequest): Promise<void> {
-    await firstValueFrom(this.http.post<void>('/api/auth/login', credentials));
+    const res = await firstValueFrom(this.http.post<AuthResponse>('/api/auth/login', credentials));
+
+    this.accessToken.set(res.accessToken);
+
+    // Decode user payload from JWT
+    const payload = JSON.parse(atob(res.accessToken.split('.')[1]));
+
+    this.currentUser.set({
+      email: payload.email || payload.sub,
+      displayName: payload.name || payload.email || 'User',
+      role:
+        payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] ||
+        payload.role ||
+        'Student',
+    });
   }
 
-  async register(request: RegisterRequest): Promise<void> {
-    await firstValueFrom(this.http.post<void>('/api/auth/register', request));
+  logout(): void {
+    this.accessToken.set(null);
+    this.currentUser.set(null);
   }
 }
