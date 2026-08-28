@@ -1,6 +1,7 @@
-import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Course } from '../../models/course.model';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'tms-course-card',
@@ -15,4 +16,6 @@ export class CourseCardComponent {
 
   enrollClicked = output<Course>();
   deleteClicked = output<number>();
+
+  public readonly auth = inject(AuthService);
 }

@@ -19,7 +19,8 @@
     >
       Enroll
     </button>
-
-    <button class="danger" type="button" (click)="deleteClicked.emit(course().id)">Delete</button>
+    @if (auth.hasRole('Admin')) {
+      <button class="danger" type="button" (click)="deleteClicked.emit(course().id)">Delete</button>
+    }
   </div>
 </div>
