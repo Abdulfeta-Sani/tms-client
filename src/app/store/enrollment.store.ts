@@ -26,17 +26,16 @@ export const EnrollmentStore = signalStore(
   withMethods((store, api = inject(EnrollmentService), sync = inject(LiveSyncService)) => ({
     loadEnrollments: rxMethod<void>(
       pipe(
-        filter(() => !store.hasLoaded()), // Prevent re-fetching on route re-entry so API data does not overwrite in-memory approval state.
+        filter(() => !store.hasLoaded()), // Avoid unnecessary requests when returning to the route.
         tap(() => patchState(store, { isLoading: true, error: null })),
         concatMap(() =>
           api.getAll().pipe(
             // tap((rows) => patchState(store, setAllEntities(rows), { isLoading: false })),
-            // Convert API rows into frontend state by normalizing IDs and assigning a temporary client-side Pending status.
+            // Preserve the status returned by the backend.
             tap((rows) => {
               const enrollments: Enrollment[] = rows.map((row) => ({
                 ...row,
                 id: String(row.id),
-                status: 'Pending',
               }));
 
               patchState(store, setAllEntities(enrollments), {
