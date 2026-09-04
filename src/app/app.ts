@@ -1,7 +1,8 @@
-import { Component, signal, ChangeDetectionStrategy, OnInit, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 
-import { EnrollmentStore } from './store/enrollment.store';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +11,12 @@ import { EnrollmentStore } from './store/enrollment.store';
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.scss',
 })
-export class App implements OnInit {
-  private store = inject(EnrollmentStore);
+export class App {
+  readonly auth = inject(AuthService);
+  readonly router = inject(Router);
 
-  protected readonly title = signal('tms-client');
-
-  ngOnInit() {
-    this.store.loadEnrollments();
-    this.store.listenForLiveUpdates();
+  logout(): void {
+    this.auth.logout();
+    void this.router.navigateByUrl('/login');
   }
 }

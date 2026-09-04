@@ -28,11 +28,15 @@ export interface AuthResponse {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
-  private accessToken = signal<string | null>(null);
+  private readonly accessToken = signal<string | null>(null);
 
-  currentUser = signal<TmsUser | null>(null);
+  readonly currentUser = signal<TmsUser | null>(null);
+
+  isAuthenticated(): boolean {
+    return this.currentUser() !== null && this.accessToken() !== null;
+  }
 
   getAccessToken(): string | null {
     return this.accessToken();
@@ -44,20 +48,41 @@ export class AuthService {
     return user?.role === role || user?.role === 'Admin';
   }
 
+  hasExactRole(role: string): boolean {
+    return this.currentUser()?.role === role;
+  }
+
+  getDefaultRoute(): string {
+    const role = this.currentUser()?.role;
+
+    switch (role) {
+      case 'Student':
+        return '/student-dashboard';
+
+      case 'Instructor':
+      case 'Admin':
+        return '/dashboard';
+
+      default:
+        return '/unauthorized';
+    }
+  }
+
   async login(credentials: LoginRequest): Promise<void> {
-    const res = await firstValueFrom(this.http.post<AuthResponse>('/api/auth/login', credentials));
+    const response = await firstValueFrom(
+      this.http.post<AuthResponse>('/api/auth/login', credentials),
+    );
 
-    this.accessToken.set(res.accessToken);
+    this.accessToken.set(response.accessToken);
 
-    // Decode user payload from JWT
-    const payload = JSON.parse(atob(res.accessToken.split('.')[1]));
+    const payload = this.decodeJwtPayload(response.accessToken);
 
     this.currentUser.set({
-      email: payload.email || payload.sub,
-      displayName: payload.name || payload.email || 'User',
+      email: payload['email'] || payload['sub'] || '',
+      displayName: payload['name'] || payload['email'] || 'User',
       role:
         payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] ||
-        payload.role ||
+        payload['role'] ||
         'Student',
     });
   }
@@ -69,5 +94,20 @@ export class AuthService {
   logout(): void {
     this.accessToken.set(null);
     this.currentUser.set(null);
+  }
+
+  private decodeJwtPayload(token: string): Record<string, any> {
+    const payload = token.split('.')[1];
+
+    if (!payload) {
+      throw new Error('Invalid access token.');
+    }
+
+    const normalizedPayload = payload
+      .replace(/-/g, '+')
+      .replace(/_/g, '/')
+      .padEnd(Math.ceil(payload.length / 4) * 4, '=');
+
+    return JSON.parse(atob(normalizedPayload));
   }
 }

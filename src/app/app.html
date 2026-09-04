@@ -1,28 +1,59 @@
 <header class="app-header">
   <div class="app-header__content">
-    <a class="app-brand" routerLink="/dashboard">TMS</a>
+    <a class="app-brand" [routerLink]="auth.getDefaultRoute()">TMS</a>
 
-    <nav class="app-navigation" aria-label="Main navigation">
-      <a
-        routerLink="/dashboard"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        Dashboard
-      </a>
+    @if (auth.isAuthenticated()) {
+      <nav class="app-navigation" aria-label="Main navigation">
+        @if (auth.hasRole('Student')) {
+          <a
+            routerLink="/student-dashboard"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Dashboard
+          </a>
+        }
 
-      <a routerLink="/courses" routerLinkActive="active"> Courses </a>
+        @if (auth.hasRole('Instructor')) {
+          <a
+            routerLink="/dashboard"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Dashboard
+          </a>
 
-      <a routerLink="/enrollment-summary" routerLinkActive="active"> Enrollment-Summary </a>
+          <a routerLink="/enrollments" routerLinkActive="active"> Enrollments </a>
 
-      <a routerLink="/enrollments" routerLinkActive="active"> Enrollments </a>
+          <a routerLink="/enrollment-summary" routerLinkActive="active"> Enrollment Summary </a>
 
-      <a routerLink="/enroll" routerLinkActive="active"> Enroll </a>
+          <a routerLink="/grade-submission" routerLinkActive="active"> Grade Submission </a>
+        }
 
-      <a routerLink="/grade-submission" routerLinkActive="active"> Grade Submission </a>
+        @if (auth.hasExactRole('Student')) {
+          <a routerLink="/enroll" routerLinkActive="active"> Enroll </a>
+        }
 
-      <a routerLink="/login" routerLinkActive="active"> Login </a>
-    </nav>
+        <a routerLink="/courses" routerLinkActive="active"> Courses </a>
+
+        @if (auth.hasRole('Admin')) {
+          <a routerLink="/admin/courses" routerLinkActive="active"> Manage Courses </a>
+        }
+
+        <span class="current-user">
+          {{ auth.currentUser()?.displayName }}
+          ({{ auth.currentUser()?.role }})
+        </span>
+
+        <button type="button" (click)="logout()">Logout</button>
+      </nav>
+    } @else {
+      <nav class="app-navigation" aria-label="Authentication navigation">
+        <a routerLink="/login" routerLinkActive="active"> Login </a>
+
+        <a routerLink="/register" routerLinkActive="active"> Register </a>
+      </nav>
+    }
   </div>
 </header>
 
