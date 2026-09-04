@@ -1,6 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 export interface TmsUser {
   email: string;
@@ -29,7 +30,7 @@ export interface AuthResponse {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly http = inject(HttpClient);
-
+  private readonly authUrl = `${environment.apiRoot}/auth`;
   private readonly accessToken = signal<string | null>(null);
 
   readonly currentUser = signal<TmsUser | null>(null);
@@ -70,7 +71,7 @@ export class AuthService {
 
   async login(credentials: LoginRequest): Promise<void> {
     const response = await firstValueFrom(
-      this.http.post<AuthResponse>('/api/auth/login', credentials),
+      this.http.post<AuthResponse>(`${this.authUrl}/login`, credentials),
     );
 
     this.accessToken.set(response.accessToken);
@@ -88,7 +89,7 @@ export class AuthService {
   }
 
   async register(request: RegisterRequest): Promise<void> {
-    await firstValueFrom(this.http.post<void>('/api/auth/register', request));
+    this.http.post<void>(`${this.authUrl}/register`, request);
   }
 
   logout(): void {
