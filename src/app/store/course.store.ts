@@ -49,11 +49,8 @@ export const CourseStore = signalStore(
       svc
         .delete(id)
         .pipe(
-          catchError((err) => {
+          catchError(() => {
             patchState(store, setAllEntities(previousSnapshot));
-            patchState(store, {
-              error: 'Cannot delete course: active student enrollments exist.',
-            });
             return EMPTY;
           }),
         )
