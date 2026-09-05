@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { removeEntity, setAllEntities, withEntities } from '@ngrx/signals/entities';
+import { removeEntity, setAllEntities, updateEntity, withEntities } from '@ngrx/signals/entities';
 import { EMPTY, catchError, tap } from 'rxjs';
 
 import { Course } from '../models/course.model';
@@ -39,6 +39,24 @@ export const CourseStore = signalStore(
           }),
         )
         .subscribe();
+    },
+
+    incrementEnrollmentCount(courseId: number): void {
+      const course = store.entityMap()[courseId];
+
+      if (!course) {
+        return;
+      }
+
+      patchState(
+        store,
+        updateEntity({
+          id: courseId,
+          changes: {
+            enrollmentCount: course.enrollmentCount + 1,
+          },
+        }),
+      );
     },
 
     deleteCourse(id: number) {

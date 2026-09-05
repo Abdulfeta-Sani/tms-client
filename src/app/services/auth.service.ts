@@ -1,7 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 
 export interface TmsUser {
   email: string;
@@ -90,6 +90,7 @@ export class AuthService {
 
   async register(request: RegisterRequest): Promise<void> {
     this.http.post<void>(`${this.authUrl}/register`, request);
+    await firstValueFrom(this.http.post<void>(`${this.authUrl}/register`, request));
   }
 
   logout(): void {

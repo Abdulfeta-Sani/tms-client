@@ -13,12 +13,14 @@
   </span>
 
   <div class="actions">
-    <button
-      (click)="enrollClicked.emit(course())"
-      [disabled]="course().enrollmentCount >= course().maxCapacity"
-    >
-      Enroll
-    </button>
+    @if (canEnroll()) {
+      <button
+        (click)="enrollClicked.emit(course())"
+        [disabled]="course().enrollmentCount >= course().maxCapacity || enrollDisabled()"
+      >
+        Enroll
+      </button>
+    }
     @if (auth.hasRole('Admin')) {
       <button class="danger" type="button" (click)="deleteClicked.emit(course().id)">Delete</button>
     }

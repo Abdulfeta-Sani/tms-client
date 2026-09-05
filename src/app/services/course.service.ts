@@ -7,7 +7,7 @@ import { Course, CourseDetail, PagedResponse } from '../models/course.model';
 @Service()
 export class CourseService {
   private http = inject(HttpClient);
-  private readonly base = `${environment.apiUrl}/courses`;
+  private readonly base = `${environment.apiV2}/courses`;
 
   getAll(page = 1, pageSize = 50) {
     return this.http

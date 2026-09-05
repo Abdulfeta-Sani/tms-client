@@ -9,6 +9,8 @@
     @for (course of store.entities(); track course.id) {
       <tms-course-card
         [course]="course"
+        [canEnroll]="auth.hasExactRole('Student')"
+        [enrollDisabled]="isEnrolling() || enrolledCourseCodes().has(course.code)"
         (enrollClicked)="handleEnroll($event)"
         (deleteClicked)="handleDelete($event)"
       />
@@ -16,6 +18,17 @@
       <p>No courses are available this term.</p>
     }
   </div>
+}
+@if (enrollmentMessage()) {
+  <p class="success" role="status">
+    {{ enrollmentMessage() }}
+  </p>
+}
+
+@if (enrollmentError()) {
+  <p class="error" role="alert">
+    {{ enrollmentError() }}
+  </p>
 }
 
 @if (selectedCourse(); as picked) {

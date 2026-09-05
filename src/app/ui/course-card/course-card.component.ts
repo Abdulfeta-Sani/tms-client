@@ -16,6 +16,8 @@ export class CourseCardComponent {
 
   enrollClicked = output<Course>();
   deleteClicked = output<number>();
+  enrollDisabled = input(false);
+  canEnroll = input(false);
 
   public readonly auth = inject(AuthService);
 }
