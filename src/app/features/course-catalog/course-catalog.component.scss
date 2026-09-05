@@ -16,3 +16,14 @@
   background: #fef2f2;
   color: #991b1b;
 }
+.course-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 1.25rem;
+}
+
+.course-grid tms-course-card {
+  flex: 1 1 280px;
+  max-width: 360px;
+}

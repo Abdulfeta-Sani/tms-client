@@ -1,34 +1,83 @@
+:host {
+  display: block;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h2 {
+  margin: 0 0 1.25rem;
+  color: #172033;
+}
+
 table {
   width: 100%;
+  overflow: hidden;
+  border: 1px solid #d9e1ec;
+  border-radius: 8px;
+  background: #ffffff;
 }
+
+th {
+  background: #172033;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+td,
+th {
+  padding: 0.85rem 1rem;
+}
+
+tr:nth-child(even) {
+  background: #f8fafc;
+}
+
 .status-badge {
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
   text-transform: uppercase;
 }
+
 .status-badge.approved {
-  background: #065f46;
-  color: #a7f3d0;
+  background: #dcfce7;
+  color: #166534;
 }
+
 .status-badge.pending {
-  background: #78350f;
-  color: #fde68a;
+  background: #fef3c7;
+  color: #92400e;
 }
+
 .status-badge.rejected {
-  background: #7f1d1d;
-  color: #fca5a5;
+  background: #fee4e2;
+  color: #b42318;
 }
+
 button {
-  padding: 0.4rem 1rem;
-  border: none;
+  border: 0;
   border-radius: 6px;
-  background: #4f46e5;
-  color: white;
+  background: #176b87;
+  color: #ffffff;
   cursor: pointer;
-  font-size: 0.85rem;
+  padding: 0.5rem 0.8rem;
+  font-weight: 700;
 }
-button:hover {
-  background: #4338ca;
+
+.error {
+  color: #b42318;
+}
+
+@media (max-width: 700px) {
+  :host {
+    padding: 1rem;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }

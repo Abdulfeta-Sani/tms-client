@@ -1,0 +1,45 @@
+:host {
+  display: block;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.dashboard {
+  padding: 2rem;
+  border: 1px solid #d9e1ec;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #172033, #176b87);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 15%);
+}
+
+h1 {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+}
+
+p {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgb(255 255 255 / 20%);
+  color: #e0f2fe;
+}
+
+button {
+  margin-top: 1.5rem;
+  border: 0;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #176b87;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  font-weight: 800;
+}
+
+button:hover {
+  background: #e0f2fe;
+}

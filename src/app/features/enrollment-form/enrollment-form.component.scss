@@ -1,0 +1,98 @@
+:host {
+  display: block;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h2 {
+  margin: 0 0 1.5rem;
+  color: #172033;
+}
+
+form {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border: 1px solid #d9e1ec;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgb(15 23 42 / 8%);
+}
+
+label {
+  margin-top: 0.5rem;
+  color: #344054;
+  font-weight: 700;
+}
+
+input,
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 0.75rem;
+  color: #172033;
+  font: inherit;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid #176b87;
+  outline-offset: 1px;
+}
+
+button {
+  width: fit-content;
+  border: 0;
+  border-radius: 6px;
+  background: #176b87;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0.7rem 1rem;
+  font-weight: 700;
+}
+
+button:hover:not(:disabled) {
+  background: #12566d;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.backup-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  align-items: end;
+  padding: 0.75rem;
+  border: 1px solid #e4e7ec;
+  border-radius: 6px;
+  background: #f8fafc;
+}
+
+.backup-row label {
+  grid-column: 1 / -1;
+}
+
+.error {
+  margin: 0;
+  color: #b42318;
+  font-size: 0.85rem;
+}
+
+.success {
+  padding: 1rem;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  background: #f0fdf4;
+  color: #166534;
+}

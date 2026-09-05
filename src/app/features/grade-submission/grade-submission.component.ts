@@ -22,6 +22,7 @@ import { MatCardModule } from '@angular/material/card';
     MatProgressSpinnerModule,
   ],
   templateUrl: './grade-submission.component.html',
+  styleUrl: './grade-submission.component.scss',
 })
 export class GradeSubmissionComponent {
   private api = inject(GradeService);

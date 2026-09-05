@@ -1,39 +1,37 @@
-.dashboard {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px;
+:host {
+  display: block;
 }
 
-.enrollment-command-center {
-  margin: 32px 0;
-}
-
-.enrollment-widgets {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
-  gap: 24px;
-  align-items: start;
-}
-
-.enrollment-list-panel,
-.dashboard-summary-panel {
-  min-width: 0;
-}
-
-.enrollment-list-panel {
-  padding: 20px;
+.summary-card {
+  padding: 1.25rem;
   border: 1px solid #d9e1ec;
-  border-radius: 12px;
+  border-radius: 10px;
   background: #ffffff;
-  box-shadow: 0 2px 8px rgb(15 23 42 / 8%);
+  box-shadow: 0 4px 14px rgb(15 23 42 / 7%);
 }
 
-@media (max-width: 768px) {
-  .dashboard {
-    padding: 16px;
-  }
+h2 {
+  margin: 0 0 1rem;
+  color: #172033;
+  font-size: 1.2rem;
+}
 
-  .enrollment-widgets {
-    grid-template-columns: 1fr;
-  }
+p {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #eef2f6;
+  color: #667085;
+}
+
+strong {
+  color: #176b87;
+}
+
+.error {
+  display: block;
+  border: 0;
+  color: #b42318;
 }

@@ -13,6 +13,7 @@ import {
   imports: [ReactiveFormsModule], // To recognize form directives by Angular
   changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './enrollment-form.component.html',
+  styleUrl: './enrollment-form.component.scss',
 })
 export class EnrollmentFormComponent {
   // inject(FormBuilder) is Angular's way of requesting a service.

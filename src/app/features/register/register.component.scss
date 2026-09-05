@@ -9,7 +9,7 @@
 
 .register-container {
   width: min(100%, 420px);
-  background: #0f172a;
+  background: #172033;
   border-radius: 16px;
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.18);
   padding: 32px 28px;
@@ -63,7 +63,7 @@ select:focus {
 button {
   border: none;
   border-radius: 10px;
-  background: #2563eb;
+  background: #176b87;
   color: #ffffff;
   font-size: 1rem;
   font-weight: 500;
@@ -72,7 +72,7 @@ button {
 }
 
 button:hover:not(:disabled) {
-  background: #1d4ed8;
+  background: #12566d;
 }
 
 button:disabled {

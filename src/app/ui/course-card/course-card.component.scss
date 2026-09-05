@@ -1,0 +1,88 @@
+:host {
+  display: flex;
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+.card {
+  display: flex;
+  min-height: 220px;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.25rem;
+  border: 1px solid #d9e1ec;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 5px 16px rgb(15 23 42 / 7%);
+}
+
+h3 {
+  margin: 0;
+  color: #172033;
+  font-size: 1.1rem;
+}
+
+h3 a {
+  color: #176b87;
+  text-decoration: none;
+}
+
+h3 a:hover {
+  text-decoration: underline;
+}
+
+p {
+  margin: 0;
+  color: #667085;
+}
+
+.badge,
+.status-badge {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 0.3rem 0.65rem;
+  background: #dcfce7;
+  color: #166534;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.badge.closed {
+  background: #fee4e2;
+  color: #b42318;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: auto;
+}
+
+button {
+  border: 0;
+  border-radius: 6px;
+  background: #176b87;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0.6rem 0.9rem;
+  font-weight: 700;
+}
+
+button:hover:not(:disabled) {
+  background: #12566d;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+button.danger {
+  background: #b42318;
+}
+
+button.danger:hover {
+  background: #912018;
+}

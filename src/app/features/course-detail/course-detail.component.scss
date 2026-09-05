@@ -1,0 +1,32 @@
+:host {
+  display: block;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h1 {
+  margin: 0 0 1rem;
+  color: #172033;
+  font-size: 2rem;
+}
+
+p {
+  padding: 1rem;
+  border: 1px solid #d9e1ec;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #475467;
+}
+
+a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #176b87;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

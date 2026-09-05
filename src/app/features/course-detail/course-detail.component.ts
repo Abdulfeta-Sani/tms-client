@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-course-detail',
   standalone: true,
   templateUrl: './course-detail.component.html',
+  styleUrl: './course-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [RouterLink],
 })

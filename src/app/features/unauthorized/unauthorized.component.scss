@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  max-width: 640px;
+  margin: 4rem auto;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 1rem;
+  color: #b42318;
+}
+
+p {
+  color: #667085;
+}
+
+a {
+  display: inline-block;
+  margin-top: 1rem;
+  border-radius: 6px;
+  background: #176b87;
+  color: #ffffff;
+  padding: 0.7rem 1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
