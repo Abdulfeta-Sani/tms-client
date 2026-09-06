@@ -4,7 +4,7 @@
 
     @if (auth.isAuthenticated()) {
       <nav class="app-navigation" aria-label="Main navigation">
-        @if (auth.hasRole('Student')) {
+        @if (auth.hasExactRole('Student')) {
           <a
             routerLink="/student-dashboard"
             routerLinkActive="active"

@@ -1,22 +1,36 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, throwError } from 'rxjs';
+import { catchError, from, switchMap, throwError } from 'rxjs';
+
+import { AuthService } from '../services/auth.service';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
+  const auth = inject(AuthService);
+
+  const isAuthRequest = req.url.endsWith('/auth/login') || req.url.endsWith('/auth/refresh');
 
   return next(req).pipe(
-    catchError((err: HttpErrorResponse) => {
-      const detailMessage = err.error?.detail ?? 'A system error occurred. Please try again.';
-
-      if (err.status === 401) {
-        router.navigate(['/login']);
-      } else {
-        console.error('API Error Response:', detailMessage);
+    catchError((error: HttpErrorResponse) => {
+      if (error.status !== 401 || isAuthRequest) {
+        return throwError(() => error);
       }
 
-      return throwError(() => err);
+      return from(auth.refreshSession()).pipe(
+        switchMap((refreshed) => {
+          if (!refreshed) {
+            void router.navigate(['/login']);
+            return throwError(() => error);
+          }
+
+          return next(req);
+        }),
+        catchError((refreshError) => {
+          void router.navigate(['/login']);
+          return throwError(() => refreshError);
+        }),
+      );
     }),
   );
 };
